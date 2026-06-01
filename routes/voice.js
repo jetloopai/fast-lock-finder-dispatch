@@ -37,13 +37,19 @@ router.post('/', (req, res) => {
 
 router.post('/menu-selection', (req, res) => {
   const digit = req.body.Digits;
-  if (digit === '1') return res.redirect(307, url('/ivr/emergency/start'));
-  if (digit === '2') return res.redirect(307, url('/ivr/appointment/start'));
-  if (digit === '3') return res.redirect(307, url('/ivr/status/start'));
-
   const twiml = new VoiceResponse();
-  twiml.say({ voice: VOICE }, 'Invalid selection. Please try again.');
-  twiml.redirect({ method: 'POST' }, url('/voice'));
+
+  if (digit === '1') {
+    twiml.redirect({ method: 'POST' }, url('/ivr/emergency/start'));
+  } else if (digit === '2') {
+    twiml.redirect({ method: 'POST' }, url('/ivr/appointment/start'));
+  } else if (digit === '3') {
+    twiml.redirect({ method: 'POST' }, url('/ivr/status/start'));
+  } else {
+    twiml.say({ voice: VOICE }, 'Invalid selection. Please try again.');
+    twiml.redirect({ method: 'POST' }, url('/voice'));
+  }
+
   res.type('text/xml').send(twiml.toString());
 });
 
