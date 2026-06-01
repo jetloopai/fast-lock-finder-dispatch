@@ -25,7 +25,8 @@ router.post('/', (req, res) => {
     'Thank you for calling Fast Lock Finder. ' +
     'Press 1 for Emergency Lockout Service. ' +
     'Press 2 to Schedule an Appointment. ' +
-    'Press 3 to Check the Status of an Existing Service Request.'
+    'Press 3 to Check the Status of an Existing Service Request. ' +
+    'Press 4 if you are a technician.'
   );
 
   // Fallback if no key pressed
@@ -45,6 +46,8 @@ router.post('/menu-selection', (req, res) => {
     twiml.redirect({ method: 'POST' }, url('/ivr/appointment/start'));
   } else if (digit === '3') {
     twiml.redirect({ method: 'POST' }, url('/ivr/status/start'));
+  } else if (digit === '4') {
+    twiml.redirect({ method: 'POST' }, url('/dispatch/start'));
   } else {
     twiml.say({ voice: VOICE }, 'Invalid selection. Please try again.');
     twiml.redirect({ method: 'POST' }, url('/voice'));
