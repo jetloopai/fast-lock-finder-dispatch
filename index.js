@@ -20,6 +20,7 @@ app.use('/ivr/appointment',    appointmentRouter);
 app.use('/ivr/status',         statusRouter);
 app.use('/dial-status',        dialStatusRouter);
 app.use('/recording-callback', recordingRouter);
+app.use('/transcription-callback', recordingRouter);
 app.use('/dispatch',           dispatchRouter);
 
 const port = process.env.PORT || 3000;

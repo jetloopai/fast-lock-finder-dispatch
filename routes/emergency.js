@@ -52,6 +52,11 @@ router.post('/start', async (req, res) => {
     method: 'POST',
     timeout: 20,
     callerId: process.env.TWILIO_PHONE_NUMBER,
+    record: 'record-from-answer',
+    recordingStatusCallback: url('/recording-callback'),
+    recordingStatusCallbackMethod: 'POST',
+    transcribe: true,
+    transcribeCallback: url('/transcription-callback/transcription'),
   });
   dial.number({ url: url('/ivr/emergency/tech-whisper'), method: 'POST' }, dispatcherPhone);
 
