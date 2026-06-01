@@ -1,0 +1,6 @@
+node_modules/
+.env
+run-migration.js
+setup-airtable.js
+fastlockfinder/
+*.log
